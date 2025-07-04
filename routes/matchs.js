@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Match = require('../models/Match');
+const Match = require('../models/match');
 
 router.get('/', async (req, res) => {
   try {
