@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Match = require('../models/match');
+const Match = require('../models/match').default;
 
 router.get('/', async (req, res) => {
   try {
@@ -14,11 +14,12 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const novaMatch = new Match(req.body);
+    await novaMatch.validate();
     const resultado = await novaMatch.save();
     res.status(201).json(resultado);
   } catch (err) {
     console.error('Erro ao salvar partida:', err);
-    res.status(400).json({ erro: 'Erro ao salvar partida', detalhes: err });
+    res.status(400).json({ erro: 'Dados inválidos', detalhes: err.message });
   }
 });
 

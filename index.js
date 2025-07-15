@@ -15,7 +15,6 @@ app.get('/', (req, res) => {
   return res.json({ mensagem: 'API funcionando!' });
 });
 
-// Conecta no MongoDB e só inicia o servidor se conectar com sucesso
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log('MongoDB conectado com sucesso');
@@ -25,7 +24,7 @@ mongoose.connect(process.env.MONGO_URI)
   })
   .catch((err) => {
     console.error('Erro ao conectar no MongoDB:', err);
-    process.exit(1); // Encerra o processo se não conectar
+    process.exit(1);
   });
 
 module.exports = app;

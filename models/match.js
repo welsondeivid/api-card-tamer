@@ -1,17 +1,21 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const playerSchema = new mongoose.Schema({
-  won: Boolean,
-  playerName: String,
-  cardsPlayed: [String]
-}, { _id: false });
-
-const matchItemSchema = new mongoose.Schema({
-  players: [playerSchema]
-}, { _id: false });
+  player: { type: String, required: true },
+  cards: {
+    type: [String],
+    required: true,
+    validate: [arr => arr.length > 0, 'cards não pode ser vazio']
+  }
+});
 
 const matchSchema = new mongoose.Schema({
-  match: [matchItemSchema]
-}, { timestamps: true });
+  player_loser: { type: String, required: true },
+  players: {
+    type: [playerSchema],
+    required: true,
+    validate: [arr => arr.length > 0, 'players não pode ser vazio']
+  }
+}, { timestamps: true});
 
-module.exports = mongoose.model('Match', matchSchema);
+export default mongoose.model('Match', matchSchema);
