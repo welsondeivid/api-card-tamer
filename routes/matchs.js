@@ -4,7 +4,7 @@ const Match = require('../models/match').default;
 
 router.get('/', async (req, res) => {
   try {
-    const matchs = await Match.find();
+    const matchs = await Match.find({}, {player_loser: 1, players: 1, _id: 0});
     return res.json(matchs);
   } catch (err) {
     return res.status(500).json({ erro: 'Erro ao buscar matchs', detalhes: err });

@@ -7,7 +7,7 @@ const playerSchema = new mongoose.Schema({
     required: true,
     validate: [arr => arr.length > 0, 'cards não pode ser vazio']
   }
-});
+}, {_id: false});
 
 const matchSchema = new mongoose.Schema({
   player_loser: { type: String, required: true },
