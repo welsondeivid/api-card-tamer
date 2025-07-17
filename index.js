@@ -11,6 +11,9 @@ const PORT = process.env.PORT || 3000;
 const matchRoutes = require('./routes/matchs');
 app.use('/matchs', matchRoutes);
 
+const deckRoutes = require('./routes/decks');
+app.use('/decks', deckRoutes);
+
 app.get('/', (req, res) => {
   return res.json({ mensagem: 'API funcionando!' });
 });
