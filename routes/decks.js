@@ -7,8 +7,9 @@ router.post('/', async (req, res) => {
   try {
     const { deckName, cardNames } = req.body;
 
-    if (typeof deckName !== 'string' || !Array.isArray(cardNames) || cardNames.length === 0) {
-      return res.status(400).json({ erro: 'Formato inválido. Esperado: deck_name (string) e cards (array não vazio)' });
+    if (typeof deckName !== 'string' || !Array.isArray(cardNames) || cardNames.length < 0 || cardNames.length > 30) {
+
+      return res.status(400).json({ erro: 'Formato inválido. Esperado: deckName (string) e cardNames (array não vazio)' });
     }
 
     const novoDeck = new Deck({ deckName, cardNames });
